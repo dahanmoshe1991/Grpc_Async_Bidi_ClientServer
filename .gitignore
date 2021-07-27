@@ -34,3 +34,6 @@
 .vs
 x64
 bin
+Client/BaseGRpcClient/packages
+grpc
+Server/BaseGRpcServer/BaseGRpcServer/obj

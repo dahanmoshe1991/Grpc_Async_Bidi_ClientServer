@@ -68,8 +68,35 @@ With a project open, go to Tools->NuGet Package Manager->Package Manager Console
 Install-Package ****** -Source "****\vcpkg\scripts\buildsystems"
 (replace ** with powershell output)
 
+After grpc installed -> update googlePath macro to vcpckg installation location + "installed\x64-windows\include" (choose your relavant os folder)
+
 ##### If you want to create a grpc c# project follow this:
 - [microsoft C# grpc tutorial](https://docs.microsoft.com/en-us/aspnet/core/tutorials/grpc/grpc-start?view=aspnetcore-5.0&tabs=visual-studio)
+
+## Generate grpc stub files
+
+In order to use grpc communication(Google's Protocol Buffers) we need to define a service, specifying the 
+methods that can be called remotely with their parameters and return types.
+
+we do this inside our .proto  files. To learn more about protocol buffers see the [protocol buffers documentation](https://developers.google.com/protocol-buffers/docs/overview)
+
+gRPC uses *protoc* with a special gRPC plugin to generate code from your proto file.
+
+use these commands to generate c++ code:
+```sh
+$(protobufPath)protoc -I=$(protosPath) -I $(googlePath) --cpp_out=$(ProjectDir)Generated $(protosPath)*.proto
+$(protobufPath)protoc -I $(protosPath) -I $(googlePath) --grpc_out=$(ProjectDir)Generated --plugin=protoc-gen-grpc=$(grpcPath)grpc_cpp_plugin.exe $(protosPath)*.proto 
+ ```
+ 
+ where :
+ - protobufPath -> protoc.exe location inside installed grpc
+ - protosPath -> location of \*.proto files to generate from.
+ - googlePath -> vcpckg installation location + "installed\x64-windows\include"
+ - --cpp_out/--grpc_out -> output location
+ - grpcPath -> googlePath + \grpc\x64-windows\tools\grpc\
+### recommendation 
+ Insert the above lines as a preBuild event to always keep your source code up to date.
+ 
 ## License
 
 MIT
