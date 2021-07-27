@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+//option csharp_namespace = "BaseGRpcServer";
+package BaseGRpc;
+import "BaseGRpcMessages.proto";
+
+// The BaseGRpcServer service definition.
+service BaseGRpcServer 
+{
+  rpc Handshake(VoidMessage) returns (VoidMessage);
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc clientStream (stream IntMessage) returns (BoolMessage);
+  rpc serverStream (BoolMessage) returns (stream BoolMessage);
+  rpc BidiStream (stream IntMessage) returns (stream BoolMessage);
+}
+

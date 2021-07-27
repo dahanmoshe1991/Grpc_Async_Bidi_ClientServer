@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+//option csharp_namespace = "BaseGRpcServer";
+
+package BaseGRpc;
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
+
+// *********** Utility/Base messages ********************
+message VoidMessage{}
+
+message BoolMessage
+{
+    bool message = 1;
+}
+
+message StringMessage
+{
+    string message = 1;
+}
+
+message IntMessage
+{
+    int32 message = 1;
+}
+
+// ******************** Enum wrappers ********************
+message ResponseCodeMessage
+{
+	enum ResponseCode
+	{
+		Success         = 0;
+		NotValid        = -1;
+		Error           = -2;
+		InvalidInput    = -3;
+	};	
+    ResponseCode responseCode = 1;
+}
