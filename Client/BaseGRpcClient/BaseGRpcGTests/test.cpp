@@ -4,7 +4,7 @@
 /// <summary>
 /// BaseGRpcClient tests
 /// Prerequists:
-/// make sure Cyclone is Running (BaseGRpcServer)
+/// make sure server is Running (BaseGRpcServer)
 /// </summary>
 
 TEST_F(BaseGRpcWrpperTestCase, Connection) {
